@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
+
 // 1. Define the TypeScript shape of our data
 interface Product {
   id: number;
@@ -36,7 +38,8 @@ export default async function Home() {
         
         {/* We map through the array and create a card for each product */}
         {products.map((product) => (
-          <div key={product.id} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white">
+          <Link href={`/product/${product.id}`} key={product.id}>
+            <div key={product.id} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white">
             <img 
               src={product.imageUrl} 
               alt={product.title} 
@@ -51,6 +54,7 @@ export default async function Home() {
               </div>
             </div>
           </div>
+          </Link>
         ))}
 
       </div>
