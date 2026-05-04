@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { error } from 'console';
 import Link from 'next/link';
+import AddToCartButton from '@/app/components/AddToCartButton';
 
 // 1. We define the blueprint again so TypeScript is happy
 interface Product {
@@ -64,9 +65,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           {/* YOUR TURN: Render the product.description inside a <p> tag */}
           <p className="text-lg text-gray-700 leading-relaxed" >{product.description}</p>
           
-          <button className="mt-8 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full font-bold">
-            Add to Cart
-          </button>
+          <AddToCartButton product={product} />
         </div>
       </div>
     </main>
