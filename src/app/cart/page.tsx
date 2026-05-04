@@ -11,7 +11,7 @@ export default function CartPage() {
   // YOUR CHALLENGE: Calculate the total price of everything in the cart.
   // Hint: You can use the .reduce() method just like we did for the total items in the Header!
   // Remember that price is a string in our database, so you'll need to wrap it in Number(item.price)
-  const totalPrice = items.reduce((sum, item) => sum +  Number(item.price), 0); 
+  const totalPrice = items.reduce((sum, item) => sum +  Number(item.price) * item.quantity, 0); 
 
   if (items.length === 0) {
     return (
