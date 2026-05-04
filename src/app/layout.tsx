@@ -5,7 +5,7 @@ import Header from "./components/Header";
 
 export const metadata: Metadata = {
   title: "My E-Commerce Store",
-  description: "Built with Next.js and Express",
+  description: "E-Commerce store for buying your luxury jerseys",
 };
 
 export default function RootLayout({
