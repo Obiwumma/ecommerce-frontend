@@ -23,6 +23,31 @@ export default function CartPage() {
       </main>
     );
   }
+  //
+
+  const handleCheckout = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items }), // Send the Zustand cart data to Express
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        // If Stripe gave us a URL, redirect the user's browser to that secure page!
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error("Checkout failed:", error);
+      alert("Something went wrong with checkout.");
+    }
+  };
+
+  //
 
   return (
     <main className="p-8 max-w-4xl mx-auto mt-8">
@@ -50,7 +75,7 @@ export default function CartPage() {
           <p className="text-gray-500">Total Amount</p>
           <p className="text-3xl font-black">${totalPrice.toFixed(2)}</p>
         </div>
-        <button className="bg-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition-colors">
+        <button onClick={handleCheckout} className="bg-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition-colors">
           Proceed to Checkout
         </button>
       </div>
