@@ -22,16 +22,18 @@ export default function Header() {
         </Link>
 
         {/* The Cart Icon & Badge */}
-        <div className="relative flex items-center cursor-pointer">
-          <span className="text-3xl">🛒</span>
-          
-          {/* We only show the red notification bubble if there is actually something in the cart */}
-          {totalItems > 0 && (
-            <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full animate-bounce">
-              {totalItems}
-            </span>
-          )}
-        </div>
+        <Link href="/cart">
+          <div className="relative flex items-center cursor-pointer">
+            <span className="text-3xl">🛒</span>
+            
+            {/* We only show the red notification bubble if there is actually something in the cart */}
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full animate-bounce">
+                {totalItems}
+              </span>
+            )}
+          </div>
+        </Link>
 
       </div>
     </header>
