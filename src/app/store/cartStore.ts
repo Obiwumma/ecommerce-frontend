@@ -1,5 +1,6 @@
 // src/store/cartStore.ts
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 // 1. Define what a single item in our cart looks like 
 // (It's exactly like a Product, but we add a 'quantity' field)
@@ -18,27 +19,32 @@ interface CartState {
 }
 
 // 3. Create the actual store
-export const useCartStore = create<CartState>((set) => ({
-  // The cart starts empty
-  items: [], 
-  
-  // The logic for adding an item
-  addItem: (newItem) => set((state) => {
-    // Check if the item is already in the cart
-    const existingItem = state.items.find((item) => item.id === newItem.id);
-    
-    if (existingItem) {
-      // If it exists, just increase the quantity by 1
-      return {
-        items: state.items.map((item) =>
-          item.id === newItem.id 
-            ? { ...item, quantity: item.quantity + 1 } 
-            : item
-        ),
-      };
+export const useCartStore = create<CartState>()(
+  persist(
+    (set) => ({
+      items: [],
+      // The logic for adding an item
+      addItem: (newItem) => set((state) => {
+        // Check if the item is already in the cart
+        const existingItem = state.items.find((item) => item.id === newItem.id);
+        
+        if (existingItem) {
+          // If it exists, just increase the quantity by 1
+
+          return {
+            items: state.items.map((item) =>
+              item.id === newItem.id 
+                ? { ...item, quantity: item.quantity + 1 } 
+                : item
+            ),
+          };
+        }
+        // If it's a brand new item, add it to the array with a quantity of 1
+        return { items: [...state.items, { ...newItem, quantity: 1 }] };
+      }),
+    }),
+    {
+      name: 'ecommerce-cart-storage', // The secret name it uses in the browser's memory
     }
-    
-    // If it's a brand new item, add it to the array with a quantity of 1
-    return { items: [...state.items, { ...newItem, quantity: 1 }] };
-  }),
-}));
+  )
+);
