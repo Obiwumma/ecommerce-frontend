@@ -16,6 +16,7 @@ export interface CartItem {
 interface CartState {
   items: CartItem[]; // An array of items in the cart
   addItem: (item: CartItem) => void; // A function to add items
+  clearCart: () => void;
 }
 
 // 3. Create the actual store
@@ -42,6 +43,7 @@ export const useCartStore = create<CartState>()(
         // If it's a brand new item, add it to the array with a quantity of 1
         return { items: [...state.items, { ...newItem, quantity: 1 }] };
       }),
+      clearCart: () => set({ items: [] }),
     }),
     {
       name: 'ecommerce-cart-storage', // The secret name it uses in the browser's memory
