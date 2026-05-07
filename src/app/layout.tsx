@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 // 1. Import the header
-import Header from "./components/Header";
+import Navbar from "./components/NavBar";
 
 export const metadata: Metadata = {
   title: "My E-Commerce Store",
@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-gray-50 text-gray-900 antialiased">
         {/* 2. Place the Header here so it sits on top of every page! */}
-        <Header />
+        <Navbar />
         
         {/* 3. Wrap children in a min-height so the footer (if we add one) stays at the bottom */}
         <div className="min-h-screen">
