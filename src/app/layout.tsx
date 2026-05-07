@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 // 1. Import the header
-import Navbar from "./components/NavBar";
+import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
   title: "My E-Commerce Store",
